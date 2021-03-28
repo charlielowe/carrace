@@ -1,0 +1,27 @@
+{
+    "tinyTruckChallenge":[
+        {"name": "reverse", "penalty":0},
+        {"name": "gateMarker", "penalty":10},
+        {"name": "rollover", "penalty":5},
+        {"name": "boundary", "penalty":5},
+        {"name": "vehicleTouch", "penalty":5},
+        {"name": "winch", "penalty":1},
+        {"name": "handWinch", "penalty":5},
+        {"name": "DNF", "penalty":"HS-PP+10"},
+        {"name": "DNS", "penalty":"HS+20"}
+    ],
+    "sorrca2021":[
+        {"name": "progress", "penalty":-2},
+        {"name": "reverse", "penalty":1},
+        {"name": "gateMarker", "penalty":10},
+        {"name": "rollover", "penalty":5},
+        {"name": "boundary", "penalty":10},
+        {"name": "vehicleTouch", "penalty":10},
+        {"name": "courseDirection", "penalty":10},
+        {"name": "selfRecovery", "penalty":3},
+        {"name": "assistedRecovery", "penalty":10},
+        {"name": "pointOut", "penalty":80},
+        {"name": "DNF", "penalty":100},
+        {"name": "DNS", "penalty":130}
+    ]
+}
