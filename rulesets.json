@@ -7,8 +7,8 @@
         {"name": "vehicleTouch", "penalty":5},
         {"name": "winch", "penalty":1},
         {"name": "handWinch", "penalty":5},
-        {"name": "DNF", "penalty":"HS-PP+10"},
-        {"name": "DNS", "penalty":"HS+20"}
+        {"name": "DNF", "penalty": 110},
+        {"name": "DNS", "penalty": 120}
     ],
     "sorrca2021":[
         {"name": "progress", "penalty":-2},

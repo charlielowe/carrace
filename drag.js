@@ -2,7 +2,12 @@ var raceType;
 var nav1 = document.getElementById("mainPage");
 var nav2 = document.getElementById("scalePage");
 var nav3 = document.getElementById("settingsPage");
-var ruleset = "tinyTruck"; 
+var ruleset = "sorrca2021"; 
+var mainPage = document.getElementById("mainPage");
+var pillDiv = document.getElementById("pillsDiv");
+var totalPoints = document.getElementById("totalPoints");
+var poitnsT = 0;
+totalPoints.innerHTML = poitnsT;
 
 window.onload = function() {
   // find the element that you want to drag.
@@ -90,17 +95,98 @@ function nav3click(){
   nav3.style.display = "flex";
 }
 
-if(ruleset=="tinyTruck"){
+
+//ruleset display
+ 
   fetch("./rulesets.json")
   .then(response => {
     return response.json();
   })
   .then(data => {
-    for(var i=0; i<data.tinyTruckChallenge.length; i++){
-      console.log(data.tinyTruckChallenge[i].name);
+    if(ruleset == "tinyTruckChallenge"){
+      var jData = data.tinyTruckChallenge;
+    }else if(ruleset == "sorrca2021"){
+      var jData = data.sorrca2021;
     }
+
+    for(var i=0; i<jData.length; i++){
+      var count = 0;
+      var div1 = document.createElement("div");
+      div1.id = "penaltyPill";
+
+      var p2 = document.createElement("p");
+      p2.id = "pillText";
+      p2.innerHTML = jData[i].name + " (" + jData[i].penalty + ")";
+      
+
+      var div2 = document.createElement("div");
+      div2.id = "pillRight";
+      
+      var p3 = document.createElement("p");
+      p3.id = "pillCount" + i;
+      p3.innerHTML = count;
+
+      var div3 = document.createElement("div");
+      div3.id = i;
+      div3.className = "pillPlus";
+      div3.setAttribute("name", jData[i].penalty);
+
+      var p4 = document.createElement("p");
+      p4.innerHTML = "+";
+
+      var div4 = document.createElement("div");
+      div4.id = i;
+      div4.className = "pillMinus";
+      div4.setAttribute("name", jData[i].penalty);
+
+      var p5 = document.createElement("p");
+      p5.innerHTML = "-";
+
+      div4.appendChild(p5);
+      div3.appendChild(p4);
+      div2.appendChild(p3);
+      div2.appendChild(div3);
+      div2.appendChild(div4);
+      div1.appendChild(p2);
+      div1.appendChild(div2);
+      pillsDiv.appendChild(div1);
+    }
+
+    var pillElements = document.getElementsByClassName("pillPlus");
+    var getClassOfElement = function() {
+      var attribute = this.id;
+      var name = this.getAttribute("name");
+      var nameInt = parseInt(name);
+      var newCount = document.getElementById(`pillCount${attribute}`).innerHTML;
+      var newcountint = parseInt(newCount);
+      newcountint+=1;
+      document.getElementById(`pillCount${attribute}`).innerHTML = newcountint;
+      poitnsT+=nameInt;
+      totalPoints.innerHTML = poitnsT;
+     };
+
+    for (var i = 0; i < pillElements.length; i++) {
+      pillElements[i].addEventListener('click', getClassOfElement, false);
+    }
+
+    var pillElements2 = document.getElementsByClassName("pillMinus");
+    var getClassOfElement = function() {
+      var attribute = this.id;
+      var name = this.getAttribute("name");
+      var nameInt = parseInt(name);
+      var newCount = document.getElementById(`pillCount${attribute}`).innerHTML;
+      var newcountint = parseInt(newCount);
+      newcountint-=1;
+      document.getElementById(`pillCount${attribute}`).innerHTML = newcountint;
+      poitnsT-=nameInt;
+      totalPoints.innerHTML = poitnsT;
+     };
+
+    for (var i = 0; i < pillElements.length; i++) {
+      pillElements2[i].addEventListener('click', getClassOfElement, false);
+    }
+
   });
-}
 
 // fetch("./rulesets.json")
 //   .then(response => {

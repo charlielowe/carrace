@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,9 +12,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
     <title>Document</title>
 </head>
+
 <body>
 
-    <!-- Start Page -->   
+    <!-- Start Page -->
 
     <div id="startPage">
         <div id="circle1">
@@ -25,71 +27,62 @@
         <div id="circle2">
             <p id="text">Competitive</p>
         </div>
-   </div>
+    </div>
 
-   <!-- Navbar Page 1 -->   
+    <!-- Navbar Page 1 -->
 
-   <div class="mainDiv" id="mainPage" style="display: none">
-    <div class="navbar">
-        <div id="navIconDiv">
-            <img id="navIcon" src="images/flag.svg" alt="flag icon" onclick="nav1click()">
-        </div>
-        <div id="navIconDiv" class="scalePointsNav">
-            <img id="navIcon" src="images/scale.svg" alt="flag icon" onclick="nav2click()">
-        </div>
-        <div id="navIconDiv">
-            <img id="navIcon" src="images/settings.svg" alt="flag icon" onclick="nav3click()">
-        </div>
-      </div>
-
-      <div id="pointsDisplay">
-          <p>Total Points:</p>
-          <p>60</p>
-      </div>
-
-      <div id="penaltyPill">
-          <p id="pillText">Reverse (+0)</p>
-          <div id="pillRight">
-            <p id="pillCount">1</p>
-            <div id="pillPlus" onclick="console.log('plus')">
-                <p>+</p>
+    <div class="mainDiv" id="mainPage" style="display: none">
+        <div class="navbar">
+            <div id="navIconDiv">
+                <img id="navIcon" src="images/flag.svg" alt="flag icon" onclick="nav1click()">
             </div>
-            <div id="pillMinus" onclick="console.log('minus')">
-                <p>-</p>
+            <div id="navIconDiv" class="scalePointsNav">
+                <img id="navIcon" src="images/scale.svg" alt="flag icon" onclick="nav2click()">
+            </div>
+            <div id="navIconDiv">
+                <img id="navIcon" src="images/settings.svg" alt="flag icon" onclick="nav3click()">
             </div>
         </div>
-      </div>
-   </div>
 
-    <!-- Navbar Page 2 -->   
-
-   <div class="mainDiv" id="scalePage" style="display: none">
-    <div class="navbar">
-        <div id="navIconDiv">
-            <img id="navIcon" src="images/flag.svg" alt="flag icon" onclick="nav1click()">
+        <div id="pointsDisplay">
+            <p>Total Points:</p>
+            <p id="totalPoints"></p>
         </div>
-        <div id="navIconDiv" class="scalePointsNav">
-            <img id="navIcon" src="images/scale.svg" alt="flag icon" onclick="nav2click()">
-        </div>
-        <div id="navIconDiv">
-            <img id="navIcon" src="images/settings.svg" alt="flag icon" onclick="nav3click()">
-        </div>
-      </div>
 
-      <div id="pointsDisplay">
-          <p>Scale Points:</p>
-          <p>-60</p>
-      </div>
-
-      <div id="scalePill">
-          <p id="scaleText">Tube bed or flat bed</p>
-          <div id="scaleRight">
-            <img src="images/arrowLeft.svg" alt="arrow facing left" onclick="scaleDropDown()">
+        <div id="pillsDiv">
+            
         </div>
-      </div>
-   </div>
+    </div>
+    <!-- Navbar Page 2 -->
 
-    <!-- Navbar Page 3 -->   
+    <div class="mainDiv" id="scalePage" style="display: none">
+        <div class="navbar">
+            <div id="navIconDiv">
+                <img id="navIcon" src="images/flag.svg" alt="flag icon" onclick="nav1click()">
+            </div>
+            <div id="navIconDiv" class="scalePointsNav">
+                <img id="navIcon" src="images/scale.svg" alt="flag icon" onclick="nav2click()">
+            </div>
+            <div id="navIconDiv">
+                <img id="navIcon" src="images/settings.svg" alt="flag icon" onclick="nav3click()">
+            </div>
+        </div>
+
+        <div id="pointsDisplay">
+            <p>Scale Points:</p>
+            <p>-60</p>
+        </div>
+
+        <div id="scalePill">
+            <p id="scaleText">Tube bed or flat bed</p>
+            <div id="scaleRight">
+                <img src="images/arrowLeft.svg" alt="arrow facing left" onclick="scaleDropDown()">
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <!-- Navbar Page 3 -->
 
     <div class="mainDiv" id="settingsPage" style="display: none">
         <div class="navbar">
@@ -102,16 +95,16 @@
             <div id="navIconDiv">
                 <img id="navIcon" src="images/settings.svg" alt="flag icon" onclick="nav3click()">
             </div>
-          </div>
-    
-          <div id="pointsDisplay">
-              <p>Settings</p>
-              <p>60</p>
-          </div>
-    
-          <div id="penaltyPill">
-              <p id="pillText">Reverse (+0)</p>
-              <div id="pillRight">
+        </div>
+
+        <div id="pointsDisplay">
+            <p>Settings</p>
+            <p>60</p>
+        </div>
+
+        <div id="penaltyPill">
+            <p id="pillText">Reverse (+0)</p>
+            <div id="pillRight">
                 <p id="pillCount">1</p>
                 <div id="pillPlus" onclick="console.log('plus')">
                     <p>+</p>
@@ -120,10 +113,12 @@
                     <p>-</p>
                 </div>
             </div>
-          </div>
-       </div>
+        </div>
+    </div>
+    </div>
 
-      <script src="main.js"></script>
-      <script src="drag.js"></script>
+    <script src="main.js"></script>
+    <script src="drag.js"></script>
 </body>
+
 </html>
