@@ -133,13 +133,19 @@ margin-top: 50vw;
 }
 
 
+#scaleWhole{
+  width: 85%;
+  height: 10vh;
+  margin-bottom: 3%;
+  margin-top: 2%;
+}
 
 #scalePill{
-  width: 85%;
+  z-index: 10;
   font-size: 1.5rem;
   position: relative;
   border-radius: 15px;
-  height: 8%;
+  height: 100%;
   background-color: white;
   filter: drop-shadow(0px 1px 4px rgba(0, 0, 0, 0.25));
   display: flex;
@@ -176,6 +182,7 @@ margin-top: 50vw;
 
 #scaleText{
   margin-left: 4vw;
+  max-width: 80%;
 }
 
 .pillPlus, .pillMinus{
@@ -217,4 +224,45 @@ margin-top: 50vw;
   font-family: "Roboto", serif;
   overflow: hidden;
   color: #202020;
+}
+
+.pillDrop{
+  background-color: white;
+  box-shadow: inset 0px 0px 4px rgba(0, 0, 0, 0.25);
+border-radius: 15px;
+width: 100%;
+
+position: relative;
+top: -30%;
+padding-top: 10%;
+padding-bottom: 5%;
+display: flex;
+flex-direction: column;
+
+}
+
+#pillPen{
+  margin: 3% 5%;
+  display: flex;
+  justify-content: space-between;
+  font-family: "Roboto", serif;
+}
+
+#checklabel{
+  display: flex;
+  align-items: center;
+}
+
+#checkArrowTrue{
+  transform: rotate(-90deg);
+}
+
+#scaleHolder{
+  padding-bottom: 5rem;
+  width: 100%;
+  overflow-y: scroll ;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 1;
 }

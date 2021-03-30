@@ -1,0 +1,35 @@
+{
+    "tinyTruckChallenge":[
+        {"name": "Tube Bed Or Flatbed", "penalties":[{"name":"metal", "penalty":-3}, {"name":"plastic", "penalty":-1}]},
+        {"name": "Bed mounted headache rack or roll bar", "penalties":[{"name":"metal", "penalty":-3}, {"name":"metal", "penalty":-3}, {"name":"metal", "penalty":-3}, {"name":"metal", "penalty":-3}, {"name":"plastic", "penalty":-1}]},
+        {"name": "Truggy", "penalties":[{"name":"metal", "penalty":-3}, {"name":"plastic", "penalty":-1}]},
+        {"name": "Full Tube Chassis", "penalties":[{"name":"metal", "penalty":-3}, {"name":"plastic", "penalty":-1}]},
+        {"name": "Interior/Exterior Cage","penalties":[{"name":"metal", "penalty":-3}, {"name":"plastic", "penalty":-1}]},
+        {"name": "Sliders", "penalties":[{"name":"metal", "penalty":-3}, {"name":"plastic", "penalty":-1}]},
+        {"name": "Hard Body", "penalties":[{"name":"metal", "penalty":-3}, {"name":"plastic", "penalty":-1}]},
+        {"name": "Drop Bed", "penalties":[{"name":"metal", "penalty":-3}, {"name":"plastic", "penalty":-1}]},
+        {"name": "Custom Built Hard Body", "penalties":[{"name":"metal", "penalty":-3}, {"name":"plastic", "penalty":-1}]},
+        {"name": "Inner Fender Wells", "penalties":[{"name":"metal", "penalty":-3}, {"name":"plastic", "penalty":-1}]},
+        {"name": "Rigid Flat Body Panels", "penalties":[{"name":"metal", "penalty":-3}, {"name":"plastic", "penalty":-1}]},
+        {"name": "Bumpers", "penalties":[{"name":"metal", "penalty":-3}, {"name":"plastic", "penalty":-1}]},
+        {"name": "Stinger/Grill Guard", "penalties":[{"name":"metal", "penalty":-3}, {"name":"plastic", "penalty":-1}]},
+        {"name": "3D Interior", "penalties":[{"name":"metal", "penalty":-3}, {"name":"plastic", "penalty":-1}]},
+        {"name": "SUV cargo area", "penalties":[{"name":"metal", "penalty":-3}, {"name":"plastic", "penalty":-1}]},
+        {"name": "2D/Half Interior", "penalties":[{"name":"metal", "penalty":-3}, {"name":"plastic", "penalty":-1}]}
+        
+    ],
+    "sorrca2021":[
+        {"name": "progress", "penalty":-2},
+        {"name": "reverse", "penalty":1},
+        {"name": "gateMarker", "penalty":10},
+        {"name": "rollover", "penalty":5},
+        {"name": "boundary", "penalty":10},
+        {"name": "vehicleTouch", "penalty":10},
+        {"name": "courseDirection", "penalty":10},
+        {"name": "selfRecovery", "penalty":3},
+        {"name": "assistedRecovery", "penalty":10},
+        {"name": "pointOut", "penalty":80},
+        {"name": "DNF", "penalty":100},
+        {"name": "DNS", "penalty":130}
+    ]
+}

@@ -4,10 +4,15 @@ var nav2 = document.getElementById("scalePage");
 var nav3 = document.getElementById("settingsPage");
 var ruleset = "sorrca2021"; 
 var mainPage = document.getElementById("mainPage");
+var scalePage = document.getElementById("scalePage");
 var pillDiv = document.getElementById("pillsDiv");
 var totalPoints = document.getElementById("totalPoints");
+var scaleP = document.getElementById("scalePointText");
 var poitnsT = 0;
+var scalePoints = 0;
 totalPoints.innerHTML = poitnsT;
+scaleP.innerHTML = scalePoints;
+var ischecked = false;
 
 window.onload = function() {
   // find the element that you want to drag.
@@ -104,6 +109,7 @@ function nav3click(){
   })
   .then(data => {
     if(ruleset == "tinyTruckChallenge"){
+      
       var jData = data.tinyTruckChallenge;
     }else if(ruleset == "sorrca2021"){
       var jData = data.sorrca2021;
@@ -188,12 +194,152 @@ function nav3click(){
 
   });
 
-// fetch("./rulesets.json")
-//   .then(response => {
-//     return response.json();
-//   })
-//   .then(data => {
-//     for(var i; i<data.tinyTruckChallenge; i++){
-//       console.log(i.name);
-//     }
-//   });
+  //scalepoint display
+
+  
+
+  fetch("./scalepoints.json")
+  .then(response => {
+    return response.json();
+  })
+  .then(data => {
+    // if(ruleset == "tinyTruckChallenge"){
+      
+      var jData = data.tinyTruckChallenge;
+    // }else if(ruleset == "sorrca2021"){
+    //   var jData = data.sorrca2021;
+    // }
+    
+    for(var i=0; i<jData.length; i++){
+      var scaleWholeDiv = document.createElement("div");
+      scaleWholeDiv.id = "scaleWhole";
+      scaleWholeDiv.className = "scaleWhole"+i;
+
+      var scalePillDiv = document.createElement("div");
+      scalePillDiv.id = "scalePill";
+      
+      var scaleText = document.createElement("p")
+      scaleText.id="scaleText";
+      scaleText.innerHTML = jData[i].name;
+
+      var scaleRightDiv= document.createElement("div");
+      scaleRightDiv.id ="scaleRight"
+      
+      // var checkInput= document.createElement("input");
+      // checkInput.id ="myCheckBox"+i;
+      // checkInput.type = "checkbox"
+      // checkInput.style.display = "none";
+      
+      
+      var checkLabel= document.createElement("label");
+      checkLabel.id = i;
+      checkLabel.className = "checklabel"
+      checkLabel.setAttribute("for", "myCheckbox");
+      
+
+      var checkArrow= document.createElement("img");
+      checkArrow.id ="checkArrow"+i;
+      checkArrow.src = "images/arrowLeft.svg"
+      checkArrow.alt = "arrow facing left";
+
+      var pillDrop = document.createElement("div");
+      pillDrop.id = "pillDrop"+i;
+      
+      pillDrop.setAttribute("class", "pillDrop");
+      pillDrop.style.display = "none";
+      
+      for(var e=0; e<jData[i].penalties.length; e++){
+        var pillPen = document.createElement("div");
+        pillPen.id = "pillPen";
+        pillPen.className = "pillPen"+i;
+        pillPen.setAttribute("name", jData[i].penalties[e].penalty); 
+      
+        var pillPenText = document.createElement("p");
+        pillPenText.innerHTML = jData[i].penalties[e].name + " ("+ jData[i].penalties[e].penalty + ")";
+
+        var justCheck = document.createElement("input");
+        justCheck.type = "checkbox";
+        justCheck.id = i;
+        justCheck.setAttribute("name", jData[i].penalties[e].penalty)
+        justCheck.className = "justCheck";
+        
+        pillPen.appendChild(pillPenText);
+        pillPen.appendChild(justCheck);
+        pillDrop.appendChild(pillPen);
+      }
+      
+      // scaleRightDiv.appendChild(checkInput);
+      checkLabel.appendChild(checkArrow);
+      scaleRightDiv.appendChild(checkLabel);
+      scalePillDiv.appendChild(scaleText);
+      scalePillDiv.appendChild(scaleRightDiv);
+      scaleWholeDiv.appendChild(scalePillDiv);
+      scaleWholeDiv.appendChild(pillDrop);
+      document.getElementById("scaleHolder").appendChild(scaleWholeDiv);
+      
+    }
+
+    var scaleElements = document.getElementsByClassName("checklabel");
+    var getClassOfScaleElement = function() {
+      var number = this.id;
+     
+      if(document.getElementById("checkArrow"+number)){
+
+        document.getElementById("checkArrow"+number).id = "checkArrowTrue"+number;
+        document.getElementById("pillDrop"+number).style.display = "flex";
+        
+        
+       
+        document.querySelector(".scaleWhole"+number).style.marginBottom = document.getElementById("pillDrop"+number).offsetHeight + "px";
+      }
+      else{
+        document.getElementById("pillDrop"+number).style.display = "none";
+        document.getElementById("checkArrowTrue"+number).id = "checkArrow"+number;
+        document.querySelector(".scaleWhole"+number).style.marginBottom = "3%";
+      }
+
+    
+    for (var i = 0; i < checks.length; i++) {
+      checks[i].addEventListener('click', getCheck, false);
+    }
+     };
+     
+    
+     var checks = document.getElementsByClassName("justCheck");
+     var getCheck = function(){
+         if(this.checked == true){
+          // for (var i = 0; i < checks.length; i++) {
+          //   if(checks[i].id== this.id){
+          //       if(checks[i].checked==true){
+          //         checks[i].checked = false;
+          //         scalePoints -= parseInt(checks[i].getAttribute("name"));
+          //         scaleP.innerHTML = scalePoints;
+          //         poitnsT+=parseInt(checks[i].getAttribute("name"));
+          //         totalPoints.innerHTML = poitnsT;
+          //       }
+                            
+            
+          //   }
+          // }
+          this.checked=true;
+           scalePoints += parseInt(this.getAttribute("name"));
+           scaleP.innerHTML = scalePoints;
+           poitnsT+=parseInt(this.getAttribute("name"));
+           totalPoints.innerHTML = poitnsT;
+           
+         }else{
+           scalePoints -= parseInt(this.getAttribute("name"));
+           scaleP.innerHTML = scalePoints;
+           poitnsT-=parseInt(this.getAttribute("name"));
+           totalPoints.innerHTML = poitnsT;
+         }
+ 
+   }
+
+    for (var i = 0; i < scaleElements.length; i++) {
+      scaleElements[i].addEventListener('click', getClassOfScaleElement, false);
+    }
+
+    
+  });
+
