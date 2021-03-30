@@ -86,31 +86,39 @@
             <div id="navIconDiv">
                 <img id="navIcon" src="images/flag.svg" alt="flag icon" onclick="nav1click()">
             </div>
-            <div id="navIconDiv" class="scalePointsNav">
+            <div id="navIconDiv" class="scalePointsNav3">
                 <img id="navIcon" src="images/scale.svg" alt="flag icon" onclick="nav2click()">
             </div>
             <div id="navIconDiv">
                 <img id="navIcon" src="images/settings.svg" alt="flag icon" onclick="nav3click()">
             </div>
         </div>
-
+       
         <div id="pointsDisplay">
             <p>Settings</p>
-            <p>60</p>
         </div>
-
-        <div id="penaltyPill">
-            <p id="pillText">Reverse (+0)</p>
-            <div id="pillRight">
-                <p id="pillCount">1</p>
-                <div id="pillPlus" onclick="console.log('plus')">
-                    <p>+</p>
-                </div>
-                <div id="pillMinus" onclick="console.log('minus')">
-                    <p>-</p>
+        <div id="settingsMain">
+            <div id="changeRulesButton">
+                <p>Change ruleset</p>
+                <div id="changeRulesButtonRight">
+                    <p id="currentRules"></p>
+                    <img onclick="changeRulesPage()" id="settingsArrow" src="images/arrowLeft.svg">
                 </div>
             </div>
         </div>
+
+        <div id="changeRulesPage">
+            <p>Rulesets</p>
+            <div id="ruleset">
+                <p>Tiny Truck Challenge</p>
+                <div id="selectButton" onclick="rulesetChange('tinyTruckChallenge')"><p>Select</p></div>
+            </div>
+            <div id="ruleset">
+                <p>Sorcca2021</p>
+                <div id="selectButton" onclick="rulesetChange('sorrca2021')"><p>Select</p></div>
+            </div>
+    </div>
+        
     </div>
     </div>
 

@@ -70,8 +70,6 @@ body {
   flex-direction: column;
   align-items: center;
   margin-top: 10vh;
-
-  height: 50vw;
 }
 
 
@@ -265,4 +263,80 @@ flex-direction: column;
   flex-direction: column;
   align-items: center;
   z-index: 1;
+}
+
+#settingsPage{
+  
+}
+
+#changeRulesButton{
+  margin-top: 10%;
+  position: relative;
+  padding-left: 5%;
+  height: 10vh;
+  align-items: center;
+  width: 85%;
+  font-size: 1.5rem;
+  display: flex;
+  font-family: "Roboto", serif;
+  filter: drop-shadow(0px 1px 4px rgba(0, 0, 0, 0.25));
+  border-radius: 20px;
+  background-color: white;
+}
+
+#changeRulesButtonRight{
+  width: 35%;
+  justify-content: space-around;
+
+  display: flex;
+  margin-right: 5%;
+  position: absolute;
+  right: 0;
+  font-size: 1rem;
+  color: gray;
+  align-items: center;
+  
+}
+
+#settingsMain{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#settingsArrow{
+  transform: rotate(180deg);
+}
+
+#changeRulesPage{
+  display: flex;
+  flex-direction: column;
+  width: 95%;
+  flex-direction: column;
+  align-items: center;
+  font-size: 2rem;
+  font-family: "Roboto", serif;
+  margin-top: 5%;
+}
+
+#ruleset{
+  background-color: white;
+  filter: drop-shadow(0px 1px 4px rgba(0, 0, 0, 0.25));
+  width: 90%;
+  height: 10vh;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 5%;
+  margin-top: 5%;
+  font-size: 1.5rem;
+}
+
+#selectButton{
+  background-color: #3454D1;
+  padding: 2% 3%;
+  border-radius: inherit;
 }

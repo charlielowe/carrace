@@ -13,6 +13,7 @@ var scalePoints = 0;
 totalPoints.innerHTML = poitnsT;
 scaleP.innerHTML = scalePoints;
 var ischecked = false;
+var raceType;
 
 window.onload = function() {
   // find the element that you want to drag.
@@ -48,7 +49,7 @@ window.onload = function() {
       console.log("inside Circle 1");
       box.style.width = '40vw';
       box.style.left = circle1.offsetLeft + 'px'
-      var raceType = "fun";
+      raceType = "fun";
       sessionStorage.setItem("raceType", raceType);
       document.getElementById("startPage").style.display = "none";
       document.getElementById("mainPage").style.display = "flex";
@@ -59,7 +60,7 @@ window.onload = function() {
       console.log("inside Circle 2");
       box.style.width = '40vw';
       box.style.left = circle2.offsetLeft + 'px'
-      var raceType = "competitive";
+      raceType = "competitive";
       sessionStorage.setItem("raceType", raceType);
       document.getElementById("startPage").style.display = "none";
       nav1.style.display = "flex";
@@ -69,9 +70,9 @@ window.onload = function() {
       box.style.width = "50vw"
     }
     console.log(raceType);
-  if(raceType=="fun"){
-  
-  }else if(raceType=="competitive"){
+  if(raceType=="competitive"){
+    
+  }else if(raceType=="fun"){
     document.querySelector('.scalePointsNav').style.display = "none";
   }
 
@@ -83,38 +84,30 @@ window.onload = function() {
 
 //Nav1 clicked
 function nav1click(){
+  if(raceType=="fun"){
+    document.querySelector('.scalePointsNav').style.display = "none";
+  }
   nav1.style.display = "flex";
   nav2.style.display = "none";
   nav3.style.display = "none";
 }
-//Nav2 clicked
-function nav2click(){
-  nav1.style.display = "none";
-  nav2.style.display = "flex";
-  nav3.style.display = "none";
-}
-//Nav2 clicked
-function nav3click(){
-  nav1.style.display = "none";
-  nav2.style.display = "none";
-  nav3.style.display = "flex";
-}
-
 
 //ruleset display
- 
+ function resetRules(){
+   document.getElementById("currentRules").innerHTML = ruleset;
   fetch("./rulesets.json")
   .then(response => {
     return response.json();
   })
   .then(data => {
+    console.log("hi there"+ruleset)
     if(ruleset == "tinyTruckChallenge"){
       
       var jData = data.tinyTruckChallenge;
     }else if(ruleset == "sorrca2021"){
       var jData = data.sorrca2021;
     }
-
+    pillDiv.innerHTML = "";
     for(var i=0; i<jData.length; i++){
       var count = 0;
       var div1 = document.createElement("div");
@@ -193,8 +186,19 @@ function nav3click(){
     }
 
   });
+}
+resetRules()
 
   //scalepoint display
+
+  //Nav2 clicked
+function nav2click(){
+  
+  nav1.style.display = "none";
+  nav2.style.display = "flex";
+  nav3.style.display = "none";
+}
+
 
   
 
@@ -308,20 +312,7 @@ function nav3click(){
      var checks = document.getElementsByClassName("justCheck");
      var getCheck = function(){
          if(this.checked == true){
-          // for (var i = 0; i < checks.length; i++) {
-          //   if(checks[i].id== this.id){
-          //       if(checks[i].checked==true){
-          //         checks[i].checked = false;
-          //         scalePoints -= parseInt(checks[i].getAttribute("name"));
-          //         scaleP.innerHTML = scalePoints;
-          //         poitnsT+=parseInt(checks[i].getAttribute("name"));
-          //         totalPoints.innerHTML = poitnsT;
-          //       }
-                            
-            
-          //   }
-          // }
-          this.checked=true;
+          
            scalePoints += parseInt(this.getAttribute("name"));
            scaleP.innerHTML = scalePoints;
            poitnsT+=parseInt(this.getAttribute("name"));
@@ -335,6 +326,7 @@ function nav3click(){
          }
  
    }
+   
 
     for (var i = 0; i < scaleElements.length; i++) {
       scaleElements[i].addEventListener('click', getClassOfScaleElement, false);
@@ -343,3 +335,44 @@ function nav3click(){
     
   });
 
+
+  //Nav2 clicked
+  function nav3click(){
+    if(raceType=="fun"){
+      document.querySelector('.scalePointsNav3').style.display = "none";
+    }
+    document.getElementById("settingsMain").style.display = "flex";
+    document.getElementById("changeRulesPage").style.display = "none";
+    nav1.style.display = "none";
+    nav2.style.display = "none";
+    nav3.style.display = "flex";
+
+    
+}
+
+function changeRulesPage(){
+  document.getElementById("settingsMain").style.display = "none";
+  document.getElementById("changeRulesPage").style.display = "flex";
+
+}
+
+function rulesetChange(newruleset){
+  ruleset = newruleset;
+  console.log(newruleset)
+  scalePoints = 0;
+  scaleP.innerHTML = scalePoints;
+  poitnsT=0;
+  totalPoints.innerHTML = poitnsT;
+  nav1click();
+  resetChecks();
+  resetRules();
+}
+
+function resetChecks(){
+  var checks = document.getElementsByClassName("justCheck");
+  
+  for (var i = 0; i < checks.length; i++) {
+    checks[i].checked = false;
+  } 
+  }
+ 
