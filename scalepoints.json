@@ -1,7 +1,7 @@
 {
     "tinyTruckChallenge":[
         {"name": "Tube Bed Or Flatbed", "penalties":[{"name":"metal", "penalty":-3}, {"name":"plastic", "penalty":-1}]},
-        {"name": "Bed mounted headache rack or roll bar", "penalties":[{"name":"metal", "penalty":-3}, {"name":"metal", "penalty":-3}, {"name":"metal", "penalty":-3}, {"name":"metal", "penalty":-3}, {"name":"plastic", "penalty":-1}]},
+        {"name": "Bed mounted headache rack or roll bar", "penalties":[{"name":"metal", "penalty":-3}, {"name":"plastic", "penalty":-1}]},
         {"name": "Truggy", "penalties":[{"name":"metal", "penalty":-3}, {"name":"plastic", "penalty":-1}]},
         {"name": "Full Tube Chassis", "penalties":[{"name":"metal", "penalty":-3}, {"name":"plastic", "penalty":-1}]},
         {"name": "Interior/Exterior Cage","penalties":[{"name":"metal", "penalty":-3}, {"name":"plastic", "penalty":-1}]},

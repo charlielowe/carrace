@@ -2,6 +2,7 @@ var raceType;
 var nav1 = document.getElementById("mainPage");
 var nav2 = document.getElementById("scalePage");
 var nav3 = document.getElementById("settingsPage");
+var navs = document.getElementById("scoreboardPage");
 var ruleset = "sorrca2021"; 
 var mainPage = document.getElementById("mainPage");
 var scalePage = document.getElementById("scalePage");
@@ -14,12 +15,20 @@ totalPoints.innerHTML = poitnsT;
 scaleP.innerHTML = scalePoints;
 var ischecked = false;
 var raceType;
+var rounds = [0];
+var players = [0];
+var currentRound = 0;
+var playerList = [];
+var currentPlayer = 0;
+var scoreMain = document.getElementById("scoreMain");
+var tempArray = [];
 
 window.onload = function() {
   // find the element that you want to drag.
   var box = document.getElementById('box');
   var circle1 = document.getElementById('circle1');
   var circle2 = document.getElementById('circle2');
+  renderRounds()
   /* listen to the touchMove event,
   every time it fires, grab the location
   of touch and assign it to box */
@@ -74,6 +83,7 @@ window.onload = function() {
     
   }else if(raceType=="fun"){
     document.querySelector('.scalePointsNav').style.display = "none";
+    document.querySelector('.scoreboardNav').style.display = "none";
   }
 
     
@@ -86,11 +96,47 @@ window.onload = function() {
 function nav1click(){
   if(raceType=="fun"){
     document.querySelector('.scalePointsNav').style.display = "none";
+    document.querySelector('.scoreboardNav').style.display = "none";
   }
   nav1.style.display = "flex";
   nav2.style.display = "none";
   nav3.style.display = "none";
+  navs.style.display = "none";
 }
+
+function compare(a, b) {
+  // Use toUpperCase() to ignore character casing
+  const scoreA = a.score;
+  const scoreB = b.score;
+
+  let comparison = 0;
+  if (scoreA > scoreB) {
+    comparison = 1;
+  } else if (scoreA < scoreB) {
+    comparison = -1;
+  }
+  return comparison;
+}
+
+function navSclick(){
+  if(raceType=="fun"){
+    document.querySelector('.scalePointsNav4').style.display = "none";
+  }
+  nav1.style.display = "none";
+  nav2.style.display = "none";
+  nav3.style.display = "none";
+  navs.style.display = "flex";
+
+  scoreMain.innerHTML = "";
+  playerList.sort(compare);
+  for(var i=0; i<playerList.length; i++){
+    var scoreDiv = document.createElement("p");
+    scoreDiv.innerHTML = (playerList[i].name + " : " + playerList[i].score);
+    scoreMain.appendChild(scoreDiv);
+  }
+}
+
+
 
 //ruleset display
  function resetRules(){
@@ -162,6 +208,7 @@ function nav1click(){
       document.getElementById(`pillCount${attribute}`).innerHTML = newcountint;
       poitnsT+=nameInt;
       totalPoints.innerHTML = poitnsT;
+      playerList[currentPlayer].score = poitnsT;
      };
 
     for (var i = 0; i < pillElements.length; i++) {
@@ -179,6 +226,7 @@ function nav1click(){
       document.getElementById(`pillCount${attribute}`).innerHTML = newcountint;
       poitnsT-=nameInt;
       totalPoints.innerHTML = poitnsT;
+      playerList[currentPlayer].score = poitnsT;
      };
 
     for (var i = 0; i < pillElements.length; i++) {
@@ -197,6 +245,7 @@ function nav2click(){
   nav1.style.display = "none";
   nav2.style.display = "flex";
   nav3.style.display = "none";
+  navs.style.display = "none";
 }
 
 
@@ -317,12 +366,16 @@ function nav2click(){
            scaleP.innerHTML = scalePoints;
            poitnsT+=parseInt(this.getAttribute("name"));
            totalPoints.innerHTML = poitnsT;
+           playerList[currentPlayer].scale = scalePoints;
+           playerList[currentPlayer].score = poitnsT;
            
          }else{
            scalePoints -= parseInt(this.getAttribute("name"));
            scaleP.innerHTML = scalePoints;
            poitnsT-=parseInt(this.getAttribute("name"));
            totalPoints.innerHTML = poitnsT;
+           playerList[currentPlayer].score = poitnsT;
+           playerList[currentPlayer].scale = scalePoints;
          }
  
    }
@@ -336,16 +389,18 @@ function nav2click(){
   });
 
 
-  //Nav2 clicked
+  //Nav3 clicked
   function nav3click(){
     if(raceType=="fun"){
       document.querySelector('.scalePointsNav3').style.display = "none";
+      document.querySelector('.scoreboardNav3').style.display = "none";
     }
     document.getElementById("settingsMain").style.display = "flex";
     document.getElementById("changeRulesPage").style.display = "none";
     nav1.style.display = "none";
     nav2.style.display = "none";
     nav3.style.display = "flex";
+    navs.style.display = "none";
 
     
 }
@@ -360,6 +415,8 @@ function rulesetChange(newruleset){
   ruleset = newruleset;
   console.log(newruleset)
   scalePoints = 0;
+  playerList[currentPlayer].score = 0;
+  playerList[currentPlayer].scale = 0;
   scaleP.innerHTML = scalePoints;
   poitnsT=0;
   totalPoints.innerHTML = poitnsT;
@@ -376,3 +433,76 @@ function resetChecks(){
   } 
   }
  
+function resetScore(){
+  scalePoints = 0;
+  scaleP.innerHTML = scalePoints;
+  playerList[currentPlayer].score = 0;
+  playerList[currentPlayer].scale = 0;
+  poitnsT=0;
+  totalPoints.innerHTML = poitnsT;
+  nav1click();
+  resetChecks();
+  resetRules();
+}
+
+function newRound(){
+  var option = document.createElement("option");
+  option.setAttribute("value", rounds.length)
+  option.innerHTML = rounds.length;
+  document.getElementById("rounds").appendChild(option);
+  
+  console.log(rounds)
+  var roundDiv = document.createElement("div");
+  roundDiv.id = "round" + rounds.length;
+  var roundP = document.createElement("p");
+  roundP.innerHTML = "Round" + rounds.length;
+  roundDiv.appendChild(roundP);
+  scoreMain.appendChild(roundDiv);
+  rounds.push(rounds.length);
+}
+
+
+function newPlayer(){
+  var option = document.createElement("option");
+  option.setAttribute("value", players.length)
+  option.innerHTML = "Player" + players.length;
+  document.getElementById("players").appendChild(option);
+  playerList[players.length-1] = new Player("player"+players.length, 0, 0);
+  players.push(players.length);
+}
+
+function renderRounds(){
+  document.getElementById("rounds").innerHTML = "";
+  for(var i=0; i<rounds.length; i++){
+    var option = document.createElement("option");
+    option.setAttribute("value", rounds[i])
+    option.innerHTML = rounds[i];
+    document.getElementById("rounds").appendChild(option);
+  }
+}
+
+function submitRounds(){
+  currentRound = parseInt(document.getElementById("rounds").value);
+  console.log(currentRound)
+}
+
+class Player {
+  constructor(name, score, scale) {
+    this.name = name;
+    this.score = score;
+    this.scale = scale;
+  }
+}
+
+function submitPlayers(){
+  currentPlayer = parseInt(document.getElementById("players").value) -1;
+  console.log(currentPlayer);
+  console.log(playerList);
+  poitnsT = playerList[currentPlayer].score;
+  scalePoints = playerList[currentPlayer].scale;
+  scaleP.innerHTML = scalePoints;
+  totalPoints.innerHTML = poitnsT;
+  nav1click();
+  resetChecks();
+  resetRules();
+}
