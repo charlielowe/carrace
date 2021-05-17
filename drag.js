@@ -55,18 +55,16 @@ window.onload = function() {
     box.offsetBottom = box.offsetTop + box.offsetHeight;
     box.offsetRight = box.offsetLeft + box.offsetWidth;
     if(!(box.offsetLeft > (circle1.offsetLeft + 35) || box.offsetRight < circle1.offsetRight - 30 || box.offsetTop < circle1.offsetTop-30 || box.offsetBottom > circle1.offsetBottom+30)){
-      console.log("inside Circle 1");
       box.style.width = '40vw';
       box.style.left = circle1.offsetLeft + 'px'
       raceType = "fun";
       sessionStorage.setItem("raceType", raceType);
       document.getElementById("startPage").style.display = "none";
       document.getElementById("mainPage").style.display = "flex";
-
+      document.getElementById("changeRulesButton").style.display = "none";
       
     }
     else if(!(box.offsetLeft > (circle2.offsetLeft + 35) || box.offsetRight < circle2.offsetRight - 30 || box.offsetTop < circle2.offsetTop-30 || box.offsetBottom > circle2.offsetBottom+30)){
-      console.log("inside Circle 2");
       box.style.width = '40vw';
       box.style.left = circle2.offsetLeft + 'px'
       raceType = "competitive";
@@ -78,12 +76,12 @@ window.onload = function() {
     else{
       box.style.width = "50vw"
     }
-    console.log(raceType);
   if(raceType=="competitive"){
     
   }else if(raceType=="fun"){
     document.querySelector('.scalePointsNav').style.display = "none";
-    document.querySelector('.scoreboardNav').style.display = "none";
+    document.querySelector('.addRound').style.display = "none";
+    document.querySelector('.addPlayer').style.display = "none";
   }
 
     
@@ -96,12 +94,12 @@ window.onload = function() {
 function nav1click(){
   if(raceType=="fun"){
     document.querySelector('.scalePointsNav').style.display = "none";
-    document.querySelector('.scoreboardNav').style.display = "none";
+    
   }
   nav1.style.display = "flex";
   nav2.style.display = "none";
   nav3.style.display = "none";
-  navs.style.display = "none";
+
 }
 
 function compare(a, b) {
@@ -128,10 +126,22 @@ function navSclick(){
   navs.style.display = "flex";
 
   scoreMain.innerHTML = "";
-  playerList.sort(compare);
+  var totalArray = [];
+
   for(var i=0; i<playerList.length; i++){
+    var totalScore = 0;
+    for(var e=0; e<playerList[i].score.length;e++){
+      totalScore+=playerList[i].score[e];
+    }
+    totalArray.push({
+      "name":playerList[i].name,
+      "score":totalScore
+    })
+  }
+  totalArray.sort(compare);
+  for(var i=0; i<totalArray.length; i++){
     var scoreDiv = document.createElement("p");
-    scoreDiv.innerHTML = (playerList[i].name + " : " + playerList[i].score);
+    scoreDiv.innerHTML = (totalArray[i].name + " : " + totalArray[i].score);
     scoreMain.appendChild(scoreDiv);
   }
 }
@@ -146,7 +156,6 @@ function navSclick(){
     return response.json();
   })
   .then(data => {
-    console.log("hi there"+ruleset)
     if(ruleset == "tinyTruckChallenge"){
       
       var jData = data.tinyTruckChallenge;
@@ -208,7 +217,7 @@ function navSclick(){
       document.getElementById(`pillCount${attribute}`).innerHTML = newcountint;
       poitnsT+=nameInt;
       totalPoints.innerHTML = poitnsT;
-      playerList[currentPlayer].score = poitnsT;
+      playerList[currentPlayer].score[currentRound] = poitnsT;
      };
 
     for (var i = 0; i < pillElements.length; i++) {
@@ -226,7 +235,7 @@ function navSclick(){
       document.getElementById(`pillCount${attribute}`).innerHTML = newcountint;
       poitnsT-=nameInt;
       totalPoints.innerHTML = poitnsT;
-      playerList[currentPlayer].score = poitnsT;
+      playerList[currentPlayer].score[currentRound] = poitnsT;
      };
 
     for (var i = 0; i < pillElements.length; i++) {
@@ -366,16 +375,16 @@ function nav2click(){
            scaleP.innerHTML = scalePoints;
            poitnsT+=parseInt(this.getAttribute("name"));
            totalPoints.innerHTML = poitnsT;
-           playerList[currentPlayer].scale = scalePoints;
-           playerList[currentPlayer].score = poitnsT;
+           playerList[currentPlayer].score[currentRound] = poitnsT;
+           playerList[currentPlayer].scale[currentRound] = scalePoints;
            
          }else{
            scalePoints -= parseInt(this.getAttribute("name"));
            scaleP.innerHTML = scalePoints;
            poitnsT-=parseInt(this.getAttribute("name"));
            totalPoints.innerHTML = poitnsT;
-           playerList[currentPlayer].score = poitnsT;
-           playerList[currentPlayer].scale = scalePoints;
+           playerList[currentPlayer].score[currentRound] = poitnsT;
+           playerList[currentPlayer].scale[currentRound] = scalePoints;
          }
  
    }
@@ -393,15 +402,14 @@ function nav2click(){
   function nav3click(){
     if(raceType=="fun"){
       document.querySelector('.scalePointsNav3').style.display = "none";
-      document.querySelector('.scoreboardNav3').style.display = "none";
+      
     }
     document.getElementById("settingsMain").style.display = "flex";
     document.getElementById("changeRulesPage").style.display = "none";
     nav1.style.display = "none";
     nav2.style.display = "none";
     nav3.style.display = "flex";
-    navs.style.display = "none";
-
+    
     
 }
 
@@ -413,10 +421,11 @@ function changeRulesPage(){
 
 function rulesetChange(newruleset){
   ruleset = newruleset;
-  console.log(newruleset)
   scalePoints = 0;
-  playerList[currentPlayer].score = 0;
-  playerList[currentPlayer].scale = 0;
+  for(var i=0; i<playerList.length; i++){
+    playerList[i].score = [];
+    playerList[i].scale = [];
+  }
   scaleP.innerHTML = scalePoints;
   poitnsT=0;
   totalPoints.innerHTML = poitnsT;
@@ -436,8 +445,11 @@ function resetChecks(){
 function resetScore(){
   scalePoints = 0;
   scaleP.innerHTML = scalePoints;
-  playerList[currentPlayer].score = 0;
-  playerList[currentPlayer].scale = 0;
+  for(var i=0; i<playerList.length; i++){
+    playerList[i].score = [];
+    playerList[i].scale = [];
+  }
+  
   poitnsT=0;
   totalPoints.innerHTML = poitnsT;
   nav1click();
@@ -451,7 +463,6 @@ function newRound(){
   option.innerHTML = rounds.length;
   document.getElementById("rounds").appendChild(option);
   
-  console.log(rounds)
   var roundDiv = document.createElement("div");
   roundDiv.id = "round" + rounds.length;
   var roundP = document.createElement("p");
@@ -459,6 +470,10 @@ function newRound(){
   roundDiv.appendChild(roundP);
   scoreMain.appendChild(roundDiv);
   rounds.push(rounds.length);
+  for(var i=0; i<playerList.length;i++){
+    playerList[i].score.push(0);
+    playerList[i].scale.push(0);
+  }
 }
 
 
@@ -467,8 +482,14 @@ function newPlayer(){
   option.setAttribute("value", players.length)
   option.innerHTML = "Player" + players.length;
   document.getElementById("players").appendChild(option);
-  playerList[players.length-1] = new Player("player"+players.length, 0, 0);
+  playerList[players.length-1] = new Player("player"+players.length, [], []);
+  
+  for(var i=0; i<rounds.length; i++){
+    playerList[players.length-1].score.push(0);
+    playerList[players.length-1].scale.push(0);
+  }
   players.push(players.length);
+  
 }
 
 function renderRounds(){
@@ -483,7 +504,13 @@ function renderRounds(){
 
 function submitRounds(){
   currentRound = parseInt(document.getElementById("rounds").value);
-  console.log(currentRound)
+  poitnsT = playerList[currentPlayer].score[currentRound];
+  scalePoints = playerList[currentPlayer].scale[currentRound];
+  scaleP.innerHTML = scalePoints;
+  totalPoints.innerHTML = poitnsT;
+  nav1click();
+  resetChecks();
+  resetRules();
 }
 
 class Player {
@@ -496,10 +523,8 @@ class Player {
 
 function submitPlayers(){
   currentPlayer = parseInt(document.getElementById("players").value) -1;
-  console.log(currentPlayer);
-  console.log(playerList);
-  poitnsT = playerList[currentPlayer].score;
-  scalePoints = playerList[currentPlayer].scale;
+  poitnsT = playerList[currentPlayer].score[currentRound];
+  scalePoints = playerList[currentPlayer].scale[currentRound];
   scaleP.innerHTML = scalePoints;
   totalPoints.innerHTML = poitnsT;
   nav1click();

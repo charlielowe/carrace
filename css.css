@@ -267,11 +267,12 @@ flex-direction: column;
 }
 
 #settingsPage{
-  
+  font-family: "Roboto", serif;
 }
 
 #changeRulesButton{
   margin-top: 10%;
+  margin-bottom: 5%;
   position: relative;
   padding-left: 5%;
   height: 10vh;
@@ -332,7 +333,7 @@ flex-direction: column;
   align-items: center;
   justify-content: space-between;
   padding: 0 5%;
-  margin-top: 5%;
+  margin-bottom: 5%;
   font-size: 1.5rem;
 }
 #ruleset1{
@@ -346,7 +347,7 @@ flex-direction: column;
   justify-content: space-between;
   font-family: "Roboto", serif;
   padding: 0 5%;
-  margin-top: 5%;
+  margin-bottom: 5%;
   font-size: 1.5rem;
 }
 
@@ -363,4 +364,23 @@ flex-direction: column;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+}
+
+.addRound, .addPlayer{
+  width: inherit;
+  display: flex;
+  flex-direction: column;
+  
+  align-items: center;
+}
+
+#roundSubmit{
+  margin-bottom: 5%;
+}
+#playerSubmit{
+  margin-bottom: 10%;
+}
+
+#rounds, #players{
+  width: 50%;
 }

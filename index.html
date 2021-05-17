@@ -39,9 +39,7 @@
             <div id="navIconDiv" class="scalePointsNav">
                 <img id="navIcon" src="images/scale.svg" alt="flag icon" onclick="nav2click()">
             </div>
-            <div id="navIconDiv">
-                <p id="navIcon" class="scoreboardNav" onclick="navSclick()">S</p>
-            </div>
+            
             <div id="navIconDiv">
                 <img id="navIcon" src="images/settings.svg" alt="flag icon" onclick="nav3click()">
             </div>
@@ -66,9 +64,7 @@
             <div id="navIconDiv" class="scalePointsNav">
                 <img id="navIcon" src="images/scale.svg" alt="flag icon" onclick="nav2click()">
             </div>
-            <div id="navIconDiv">
-                <p id="navIcon" class="scoreboardNav2" onclick="navSclick()">S</p>
-            </div>
+         
             <div id="navIconDiv">
                 <img id="navIcon" src="images/settings.svg" alt="flag icon" onclick="nav3click()">
             </div>
@@ -96,9 +92,7 @@
             <div id="navIconDiv" class="scalePointsNav3">
                 <img id="navIcon" src="images/scale.svg" alt="flag icon" onclick="nav2click()">
             </div>
-            <div id="navIconDiv">
-                <p id="navIcon" class="scoreboardNav3" onclick="navSclick()">S</p>
-            </div>
+            
             <div id="navIconDiv">
                 <img id="navIcon" src="images/settings.svg" alt="flag icon" onclick="nav3click()">
             </div>
@@ -122,20 +116,20 @@
                  <div id="selectButton" onclick="resetScore()"><p>Reset</p></div>
             </div>
            
-           <div id="ruleset1">
+           <div class="addRound"><div id="ruleset1">
             <p>Add Round</p>
-            <div id="selectButton" onclick="newRound()"><p>Save</p></div>
+            <div id="selectButton" onclick="newRound()"><p>Add</p></div>
             </div>
 
             <label for="cars">Choose a round:</label>
             <select name="cars" id="rounds">
-              <option value="volvo">0</option>
+              <option value="volvo"></option>
               
             </select>
-            <br><br>
-            <input type="submit" value="Submit" onclick="submitRounds()">
-        
-            <div id="ruleset1">
+            <br>
+            <input type="submit" value="Submit" id="roundSubmit" onclick="submitRounds()">
+        </div>
+            <div class="addPlayer"><div id="ruleset1">
                 <p>Add player </p>
                 <div id="selectButton" onclick="newPlayer()"><p>add</p></div>
            </div>
@@ -144,9 +138,10 @@
             <select name="cars" id="players">
               
             </select>
-            <br><br>
-            <input type="submit" value="Submit" onclick="submitPlayers()">
+            <br>
+            <input type="submit" value="Submit" id="playerSubmit" onclick="submitPlayers()">
         </div>
+    
 
         <div id="changeRulesPage">
             <p>Rulesets</p>
@@ -161,30 +156,11 @@
         </div>
     </div>
 
-    <!-- Scoreboard Page -->
 
-    <div class="mainDiv" id="scoreboardPage" style="display: none">
-        <div class="navbar">
-            <div id="navIconDiv">
-                <img id="navIcon" src="images/flag.svg" alt="flag icon" onclick="nav1click()">
-            </div>
-            <div id="navIconDiv" class="scalePointsNav4">
-                <img id="navIcon" src="images/scale.svg" alt="flag icon" onclick="nav2click()">
-            </div>
-            <div id="navIconDiv">
-                <p id="navIcon" class="scoreboardNav" onclick="navSclick()">S</p>
-            </div>
-            <div id="navIconDiv">
-                <img id="navIcon" src="images/settings.svg" alt="flag icon" onclick="nav3click()">
-            </div>
-        </div>
-       
-        <div id="pointsDisplay">
-            <p>Scoreboard</p>
-        </div>
         <div id="scoreMain">
         
         </div>
+   
     <script src="main.js"></script>
     <script src="drag.js"></script>
     
